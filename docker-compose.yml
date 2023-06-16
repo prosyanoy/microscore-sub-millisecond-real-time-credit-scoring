@@ -1,0 +1,17 @@
+services:
+  api:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      MICROSCORE_ENGINE: ${MICROSCORE_ENGINE:-cpp}
+      MICROSCORE_AUTO_SEED: "1"
+    volumes:
+      - microscore-state:/home/app/state
+  loadtest:
+    image: locustio/locust
+    profiles: ["load"]
+    depends_on: [api]
+    volumes: ["./benchmarks:/mnt/locust"]
+    command: -f /mnt/locust/locustfile.py --headless -u 32 -r 32 -t 30s --host http://api:8000
+volumes:
+  microscore-state:

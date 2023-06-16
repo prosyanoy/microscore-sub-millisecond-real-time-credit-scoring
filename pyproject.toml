@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel", "pybind11>=2.12"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "microscore"
+version = "0.1.0"
+description = "Sub-millisecond real-time credit scoring with a C++ tree-ensemble evaluator"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy",
+  "pandas",
+  "scikit-learn",
+  "lightgbm>=4.0",
+  "onnxruntime",
+  "onnxmltools",
+  "skl2onnx",
+  "mlflow>=2.14",
+  "fastapi",
+  "uvicorn",
+  "prometheus-client",
+  "pydantic>=2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "httpx", "locust"]
+
+[tool.setuptools]
+packages = ["microscore"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning", "ignore::UserWarning", "ignore::FutureWarning"]

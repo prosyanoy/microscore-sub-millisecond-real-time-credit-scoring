@@ -1,0 +1,9 @@
+.venv
+.git
+mlflow
+data
+.cache
+build
+*.egg-info
+__pycache__
+.pytest_cache
